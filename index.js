@@ -5,3 +5,5 @@ if (1 < 10) {
 }
 
 console.log("Breaking change");
+
+console.log(`minor bug fix`);
