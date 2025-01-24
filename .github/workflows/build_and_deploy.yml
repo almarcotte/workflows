@@ -69,8 +69,7 @@ jobs:
         with:
           script: |
             const [owner, repo] = "almarcotte/workflow-triggers".split("/");
-            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
-            await octokit.rest.actions.createWorkflowDispatch({
+            await github.rest.actions.createWorkflowDispatch({
               owner,
               repo,
               workflow_id: "deploy.yml",
