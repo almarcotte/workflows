@@ -1,3 +1,9 @@
+## [2.1.0](https://github.com/almarcotte/workflows/compare/v2.0.1...v2.1.0) (2025-01-24)
+
+### Features
+
+* **logs:** logging stuff now ([de73ee0](https://github.com/almarcotte/workflows/commit/de73ee037f309fc893b40ec844b7afe8c251a355))
+
 ## [2.0.1](https://github.com/almarcotte/workflows/compare/v2.0.0...v2.0.1) (2025-01-24)
 
 ### Bug Fixes
