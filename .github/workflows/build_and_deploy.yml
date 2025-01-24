@@ -62,13 +62,11 @@ jobs:
     needs:
       - build
       - release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: almarcotte/workflow-trigger/.github/workflows/deploy.yml@main
-        with:
-          version: ${{ needs.release.outputs.version }}
-          environment: development
-        secrets: inherit
+    uses: almarcotte/workflow-trigger/.github/workflows/deploy.yml@main
+    with:
+      version: ${{ needs.release.outputs.version }}
+      environment: development
+    secrets: inherit
 
   deploy_prod:
     if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
