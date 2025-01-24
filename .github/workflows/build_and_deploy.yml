@@ -1,0 +1,73 @@
+name: Build and Deploy
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Run Semantic Release
+        id: semantic_release
+        run: |
+          npx semantic-release --ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract Version from Tag
+        id: get_version
+        run: |
+          VERSION=$(git describe --tags --abbrev=0)
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+  build:
+    if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - run: echo "authenticating to aws"
+
+      - name: Upload archive to S3
+        run: npm run publish
+        env:
+          VERSION: ${{ needs.release.outputs.version }}
+
+  deploy_dev:
+    if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploying to dev"
+
+  deploy_prod:
+    if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
+    needs:
+      - build
+      - deploy_dev
+    environment: production
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "deploying to prod"
