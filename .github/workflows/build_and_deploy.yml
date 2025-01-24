@@ -59,10 +59,16 @@ jobs:
 
   deploy_dev:
     if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
-    needs: build
+    needs:
+      - build
+      - release
     runs-on: ubuntu-latest
     steps:
-      - run: echo "deploying to dev"
+      - uses: almarcotte/workflows-trigger/.github/workflows/deploy.yml@main
+        with:
+          version: ${{ needs.release.outputs.version }}
+          environment: development
+        secrets: inherit
 
   deploy_prod:
     if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
