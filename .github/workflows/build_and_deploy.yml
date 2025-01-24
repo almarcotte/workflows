@@ -64,7 +64,7 @@ jobs:
       - release
     uses: almarcotte/workflow-triggers/.github/workflows/deploy.yml@main
     with:
-      version: ${{ needs.release.outputs.version }}
+      version: "${{ needs.release.outputs.version }}"
       environment: development
     secrets: inherit
 
