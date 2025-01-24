@@ -64,7 +64,7 @@ jobs:
       - release
     runs-on: ubuntu-latest
     steps:
-      - uses: almarcotte/workflows-trigger/.github/workflows/deploy.yml@main
+      - uses: almarcotte/workflow-trigger/.github/workflows/deploy.yml@main
         with:
           version: ${{ needs.release.outputs.version }}
           environment: development
