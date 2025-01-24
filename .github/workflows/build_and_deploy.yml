@@ -62,11 +62,26 @@ jobs:
     needs:
       - build
       - release
-    uses: almarcotte/workflow-triggers/.github/workflows/deploy.yml@main
-    with:
-      version: "${{ needs.release.outputs.version }}"
-      environment: development
-    secrets: inherit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Infrastructure Deployment
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const [owner, repo] = "almarcotte/workflow-triggers".split("/");
+            const octokit = github.getOctokit(process.env.GITHUB_TOKEN);
+            await octokit.rest.actions.createWorkflowDispatch({
+              owner,
+              repo,
+              workflow_id: "deploy.yml",
+              ref: "main",
+              inputs: {
+                version: "${{ needs.release.outputs.version }}",
+                environment: "development"
+              }
+            });
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   deploy_prod:
     if: github.repository == 'almarcotte/workflows' && github.ref == 'refs/heads/main'
