@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/almarcotte/workflows/compare/v1.1.0...v2.0.0) (2025-01-24)
+
+### ⚠ BREAKING CHANGES
+
+* **index:** Now with extra breaking changes
+
+### Features
+
+* **index:** Some stuff ([4c9aba4](https://github.com/almarcotte/workflows/commit/4c9aba44573fd91d353d5832ba35f129c3e5c147))
+
 ## [1.1.0](https://github.com/almarcotte/workflows/compare/v1.0.0...v1.1.0) (2025-01-24)
 
 ### Features
