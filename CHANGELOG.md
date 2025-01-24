@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/almarcotte/workflows/compare/v2.0.0...v2.0.1) (2025-01-24)
+
+### Bug Fixes
+
+* **index:** minor bug fix ([1255d6d](https://github.com/almarcotte/workflows/commit/1255d6d0a366acc4dc8a4d210788d5f5e7526320))
+
 ## [2.0.0](https://github.com/almarcotte/workflows/compare/v1.1.0...v2.0.0) (2025-01-24)
 
 ### ⚠ BREAKING CHANGES
