@@ -1,3 +1,14 @@
+## [1.1.0](https://github.com/almarcotte/workflows/compare/v1.0.0...v1.1.0) (2025-01-24)
+
+### Features
+
+* **hello:** adding hello world ([e4b4343](https://github.com/almarcotte/workflows/commit/e4b434306b022855d9924a2d4e8ec1c712d53133))
+* **numbers:** adding numbers as a new feature ([3d734b9](https://github.com/almarcotte/workflows/commit/3d734b9af19b269e8dc983a593543bced935e85d))
+
+### Bug Fixes
+
+* **numbers:** big bug found ([0e27747](https://github.com/almarcotte/workflows/commit/0e27747a120a7a832f11d1aa6f537a4f13aab1ae))
+
 ## 1.0.0 (2025-01-24)
 
 ### Features
