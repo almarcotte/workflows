@@ -2,6 +2,11 @@ name: Manual Dispatch and Chaining Test
 
 on:
   workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        required: true
+        description: Version
 
 jobs:
   release:
@@ -13,8 +18,9 @@ jobs:
 
       - name: Extract Version from Tag
         id: get_version
+        env:
+          VERSION: ${{ inputs.version }}
         run: |
-          VERSION=$(time)
           echo "version=${VERSION}" >> $GITHUB_OUTPUT
 
   build:
@@ -38,4 +44,4 @@ jobs:
     with:
       version: ${{ needs.release.outputs.version }}
       environment: development
-
+    secrets: inherit
