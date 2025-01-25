@@ -30,7 +30,7 @@ jobs:
       - build
       - release
     environment: development
-    uses: ./.github/workflows/dispatch.yml@main
+    uses: ./.github/workflows/deploy.yml
     with:
       version: ${{ needs.release.outputs.version }}
       environment: development
@@ -40,7 +40,7 @@ jobs:
       - build
       - release
     environment: production
-    uses: ./.github/workflows/dispatch.yml@main
+    uses: ./.github/workflows/deploy.yml
     with:
       version: ${{ needs.release.outputs.version }}
       environment: production
