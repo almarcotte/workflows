@@ -31,7 +31,7 @@ jobs:
 
       - run: echo "authenticating to aws"
 
-  deploy_dev:
+  deploy:
     needs:
       - build
       - release
