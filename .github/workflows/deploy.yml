@@ -1,0 +1,22 @@
+name: Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      version:
+        required: true
+        description: Some value
+        type: string
+
+      environment:
+        required: true
+        description: The environment this is running in
+        type: string
+
+jobs:
+  job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ inputs.version }}
+
+      - run: echo ${{ inputs.environment }}

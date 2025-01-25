@@ -1,0 +1,46 @@
+name: Manual Dispatch and Chaining Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.get_version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Extract Version from Tag
+        id: get_version
+        run: |
+          VERSION=$(time)
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+  build:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: echo "authenticating to aws"
+
+  deploy_dev:
+    needs:
+      - build
+      - release
+    environment: development
+    uses: ./github/workflows/dispatch.yml@main
+    with:
+      version: ${{ needs.release.outputs.version }}
+      environment: development
+
+  deploy_prod:
+    needs:
+      - build
+      - release
+    environment: production
+    uses: ./github/workflows/dispatch.yml@main
+    with:
+      version: ${{ needs.release.outputs.version }}
+      environment: production
