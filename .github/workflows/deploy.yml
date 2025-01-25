@@ -21,3 +21,5 @@ jobs:
       - run: echo ${{ inputs.version }}
 
       - run: echo ${{ inputs.environment }}
+
+      - run: echo ${{ secrets.SECRET_NAME }}
