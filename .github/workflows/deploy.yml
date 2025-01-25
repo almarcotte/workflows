@@ -22,4 +22,4 @@ jobs:
 
       - run: echo ${{ inputs.environment }}
 
-      - run: echo ${{ secrets.SECRET_NAME }}
+      - run: echo ${{ vars.VAR_NAME }}
