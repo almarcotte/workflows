@@ -14,7 +14,7 @@ on:
         type: string
 
 jobs:
-  job-1:
+  deploy:
     environment: ${{ inputs.environment }}
     runs-on: ubuntu-latest
     steps:
