@@ -43,5 +43,5 @@ jobs:
     uses: ./.github/workflows/deploy.yml
     with:
       version: ${{ needs.release.outputs.version }}
-      environment: development
+      environment: ${{ matrix.target }}
     secrets: inherit
