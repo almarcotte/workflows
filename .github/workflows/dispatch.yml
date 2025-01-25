@@ -29,18 +29,14 @@ jobs:
     needs:
       - build
       - release
-    environment: development
+    strategy:
+      matrix:
+        target:
+          - development
+          - production
+    environment: ${{ matrix.target }}
     uses: ./.github/workflows/deploy.yml
     with:
       version: ${{ needs.release.outputs.version }}
       environment: development
 
-  deploy_prod:
-    needs:
-      - build
-      - release
-    environment: production
-    uses: ./.github/workflows/deploy.yml
-    with:
-      version: ${{ needs.release.outputs.version }}
-      environment: production
